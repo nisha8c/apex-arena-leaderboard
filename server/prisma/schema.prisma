@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // direct (for migrate)
+}
+
+enum Role {
+  admin
+  user
+}
+
+enum PlayerStatus {
+  active
+  inactive
+  banned
+}
+
+model User {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  full_name     String
+  role          Role
+  password_hash String
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+}
+
+model Player {
+  id           String       @id @default(uuid())
+  username     String       @unique
+  total_score  Int          @default(0)
+  level        Int          @default(1)
+  games_played Int          @default(0)
+  games_won    Int          @default(0)
+  status       PlayerStatus
+  avatar_url   String?
+  country      String?
+  last_played  DateTime     @default(now())
+  created_at   DateTime     @default(now())
+  updated_at   DateTime     @updatedAt
+
+  @@index([total_score(sort: Desc)])
+  @@index([created_at(sort: Desc)])
+  @@index([status])
+}
