@@ -39,8 +39,19 @@
 <img width="1025" height="913" alt="addPlayer" src="https://github.com/user-attachments/assets/874ef9d5-4cd8-4f6d-8846-a9e5613a1154" />
 
 
+# How to run locally
+1. Clone repo
 
+## In Server folder
+1. npm i
+2. npx prisma generate
+3. npm run dev
 
+## In Main app folder where client code resides
+1. npm i
+2. npm run dev
+
+## Note: You will need your own env variables used at: server/src/env.ts
 
 # React + TypeScript + Vite
 
